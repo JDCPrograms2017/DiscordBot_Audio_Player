@@ -18,10 +18,7 @@ intents.members = True
 #Sets the prefix to activate the bot to a / and sets the intents to the ones we enabled above
 bot = commands.Bot(command_prefix='/',intents = intents)
 
-@bot.command()
-async def hello(ctx):
-    await ctx.send(f"Hello {ctx.author.mention}!")
-
+#Bot joins the vc of the user who issued the command if they are in a vc
 @bot.command()
 async def join(ctx):
     if(ctx.author.voice):
@@ -30,6 +27,7 @@ async def join(ctx):
     else:
         await ctx.send("Not in vc")
 
+#Leaves when leave Command is used if the bot is in a channel
 @bot.command()
 async def leave(ctx):
     if(ctx.voice_client):
