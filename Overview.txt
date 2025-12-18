@@ -1,0 +1,7 @@
+Final Product: A Discord bot capable of playing audio via links
+
+What I Need:
+* Create the bot
+*Add commands
+*Link Handling (if a bad link or anything like that is given what happens?)
+*API calls between the bot and spotify/youtube
