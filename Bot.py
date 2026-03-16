@@ -16,27 +16,16 @@ intents.message_content = True
 intents.members = True
 
 #Sets the prefix to activate the bot to a / and sets the intents to the ones we enabled above
-bot = commands.Bot(command_prefix='/',intents = intents)
+bot = commands.Bot(command_prefix='!',intents = intents)
 
-#Bot joins the vc of the user who issued the command if they are in a vc
-@bot.command()
-async def join(ctx):
-    if(ctx.author.voice):
-        channel = ctx.message.author.voice.channel
-        await channel.connect()
-    else:
-        await ctx.send("Not in vc")
+async def setup_hook():
+    await bot.load_extension("cogs.music")
 
-#Leaves when leave Command is used if the bot is in a channel
-@bot.command()
-async def leave(ctx):
-    if(ctx.voice_client):
-        await ctx.guild.voice_client.disconnect()
-        await ctx.send("I left")
-    else:
-        await ctx.send("I am not in a vc")
+@bot.event
+async def on_message(message):
+    print(f"Message received: {message.content}")
+    await bot.process_commands(message)
 
-
+bot.setup_hook = setup_hook
 
 bot.run(token,log_handler=handler,log_level=logging.DEBUG)
-
