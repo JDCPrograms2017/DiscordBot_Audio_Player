@@ -15,11 +15,12 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
-#Sets the prefix to activate the bot to a / and sets the intents to the ones we enabled above
+#Sets the prefix to activate the bot to a ! and sets the intents to the ones we enabled above
 bot = commands.Bot(command_prefix='!',intents = intents)
 
 async def setup_hook():
     await bot.load_extension("cogs.music")
+    print("Music cog loaded")
 
 @bot.event
 async def on_message(message):
